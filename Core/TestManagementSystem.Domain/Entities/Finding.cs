@@ -8,6 +8,7 @@ namespace TestManagementSystem.Domain.Entities
 {
     public class Finding
     {
+        public Guid Id { get; set; }
         public ImportanceLevel ImportanceLevel { get; set; }
         public Status Status { get; set; }
         public string Description { get; set; }

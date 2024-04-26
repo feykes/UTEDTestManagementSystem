@@ -8,5 +8,7 @@ namespace TestManagementSystem.Domain.Entities
 {
     public class UploadedFile
     {
+        public Guid Id { get; set; }
     }
 }
+        
