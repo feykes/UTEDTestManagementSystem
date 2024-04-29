@@ -1,3 +1,4 @@
+using TestManagementSystem.Application;
 using TestManagementSystem.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices();
 
 builder.Services.AddEndpointsApiExplorer();

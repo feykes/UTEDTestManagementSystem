@@ -6,11 +6,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TestManagementSystem.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class mig_1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Tests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Team = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    PhaseNo = table.Column<byte>(type: "tinyint", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tests", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Findings",
                 columns: table => new
@@ -22,11 +37,17 @@ namespace TestManagementSystem.Persistence.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Round = table.Column<byte>(type: "tinyint", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ToWho = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ToWho = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Findings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Findings_Tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Tests",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -50,6 +71,11 @@ namespace TestManagementSystem.Persistence.Migrations
                 name: "IX_Files_FindingId",
                 table: "Files",
                 column: "FindingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Findings_TestId",
+                table: "Findings",
+                column: "TestId");
         }
 
         /// <inheritdoc />
@@ -60,6 +86,9 @@ namespace TestManagementSystem.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Findings");
+
+            migrationBuilder.DropTable(
+                name: "Tests");
         }
     }
 }

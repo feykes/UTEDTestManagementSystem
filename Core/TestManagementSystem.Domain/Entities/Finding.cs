@@ -18,7 +18,6 @@ namespace TestManagementSystem.Domain.Entities
         public string ToWho { get; set; }
         public ICollection<UploadedFile> Files { get; set; }
     }
-
     public enum ImportanceLevel
     {
         Low,

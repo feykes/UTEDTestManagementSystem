@@ -48,13 +48,41 @@ namespace TestManagementSystem.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("TestId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ToWho")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TestId");
+
                     b.ToTable("Findings");
+                });
+
+            modelBuilder.Entity("TestManagementSystem.Domain.Entities.Test", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("PhaseNo")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Team")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tests");
                 });
 
             modelBuilder.Entity("TestManagementSystem.Domain.Entities.UploadedFile", b =>
@@ -73,6 +101,13 @@ namespace TestManagementSystem.Persistence.Migrations
                     b.ToTable("Files");
                 });
 
+            modelBuilder.Entity("TestManagementSystem.Domain.Entities.Finding", b =>
+                {
+                    b.HasOne("TestManagementSystem.Domain.Entities.Test", null)
+                        .WithMany("Findings")
+                        .HasForeignKey("TestId");
+                });
+
             modelBuilder.Entity("TestManagementSystem.Domain.Entities.UploadedFile", b =>
                 {
                     b.HasOne("TestManagementSystem.Domain.Entities.Finding", null)
@@ -83,6 +118,11 @@ namespace TestManagementSystem.Persistence.Migrations
             modelBuilder.Entity("TestManagementSystem.Domain.Entities.Finding", b =>
                 {
                     b.Navigation("Files");
+                });
+
+            modelBuilder.Entity("TestManagementSystem.Domain.Entities.Test", b =>
+                {
+                    b.Navigation("Findings");
                 });
 #pragma warning restore 612, 618
         }

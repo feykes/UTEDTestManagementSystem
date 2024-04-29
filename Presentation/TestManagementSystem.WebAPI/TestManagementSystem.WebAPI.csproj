@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\TestManagemenetSystem.Application\TestManagementSystem.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\TestManagementSystem.Persistence\TestManagementSystem.Persistence.csproj" />
   </ItemGroup>
 
