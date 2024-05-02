@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TestManagementSystem.Application.Repositories;
@@ -26,9 +27,17 @@ namespace TestManagementSystem.Persistence.Repositories
             return data;
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(Guid id)
         {
             return await Table.FindAsync(id);
+        }
+
+        public IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true)
+        {
+            var query = Table.Where(method);
+            if (!tracking)
+                query = query.AsNoTracking();
+            return query;
         }
     }
 }

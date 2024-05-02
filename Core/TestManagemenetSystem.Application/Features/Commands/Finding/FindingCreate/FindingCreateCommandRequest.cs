@@ -13,6 +13,7 @@ namespace TestManagementSystem.Application.Features.Commands.Finding.FindingCrea
         public ImportanceLevel ImportanceLevel { get; set; }
         public Status Status { get; set; }
         public string Description { get; set; }
+        public string? Note { get; set; }
         public Guid TestId { get; set; }
     }
 }

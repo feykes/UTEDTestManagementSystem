@@ -53,9 +53,7 @@ namespace TestManagementSystem.Persistence.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Round = table.Column<byte>(type: "tinyint", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ToWho = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>

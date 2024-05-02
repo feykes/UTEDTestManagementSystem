@@ -14,7 +14,6 @@ namespace TestManagementSystem.Domain.Entities
         public string Description { get; set; }
         public DateTime Date { get; set; } 
         public string? Note { get; set; }
-        public string? ToWho { get; set; }
         public Test Test { get; set; }
         public Guid TestId { get; set; }
         public ICollection<UploadedFile>? Files { get; set; }

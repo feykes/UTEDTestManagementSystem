@@ -10,5 +10,6 @@ namespace TestManagementSystem.Application.Features.Queries.Finding.FindingList
 {
     public class FindingListQueryRequest : IRequest<List<Domain.Entities.Finding>>
     {
+        public Guid TestId { get; set; }
     }
 }

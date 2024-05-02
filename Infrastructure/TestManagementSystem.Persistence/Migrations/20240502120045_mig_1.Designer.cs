@@ -12,7 +12,7 @@ using TestManagementSystem.Persistence.Context;
 namespace TestManagementSystem.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240502075713_mig_1")]
+    [Migration("20240502120045_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -42,21 +42,13 @@ namespace TestManagementSystem.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Round")
-                        .HasColumnType("tinyint");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<Guid>("TestId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ToWho")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -39,21 +39,13 @@ namespace TestManagementSystem.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Round")
-                        .HasColumnType("tinyint");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<Guid>("TestId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ToWho")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

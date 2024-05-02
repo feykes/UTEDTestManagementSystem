@@ -17,9 +17,22 @@ namespace TestManagementSystem.Application.Features.Commands.Finding.FindingCrea
             _findingWriteRepository = findingWriteRepository;
         }
 
-        public Task<FindingCreateCommandResponse> Handle(FindingCreateCommandRequest request, CancellationToken cancellationToken)
+        public async Task<FindingCreateCommandResponse> Handle(FindingCreateCommandRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = new Domain.Entities.Finding()
+            {
+                Id=Guid.NewGuid(),
+                ImportanceLevel=request.ImportanceLevel,
+                Status=request.Status,
+                Description=request.Description,
+                Date=DateTime.Now,
+                Note=request.Note,
+                TestId=request.TestId
+            };
+
+            await _findingWriteRepository.AddAsync(entity);
+            await _findingWriteRepository.SaveAsync();
+            return new();
         }
     }
 }

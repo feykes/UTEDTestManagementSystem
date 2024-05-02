@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,8 @@ namespace TestManagementSystem.Application.Features.Queries.Finding.FindingList
 
         public async Task<List<Domain.Entities.Finding>> Handle(FindingListQueryRequest request, CancellationToken cancellationToken)
         {
-            var data = await _findingReadRepository.GetAllAsync();
-            return data.ToList();
+            var data = await _findingReadRepository.GetWhere(f => f.TestId == request.TestId, true).ToListAsync();
+            return data;
         }
     }
 }
