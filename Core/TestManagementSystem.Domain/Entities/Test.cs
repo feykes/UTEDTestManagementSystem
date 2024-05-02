@@ -10,17 +10,12 @@ namespace TestManagementSystem.Domain.Entities
     {
         public Guid Id { get; set; }
         public ICollection<Finding>? Findings { get; set; }
-        public Team Team { get; set; }
-        public int? ProjectId { get; set; }
-        public byte? PhaseNo { get; set; }
+        public Project Project { get; set; }
+        public Guid ProjectId { get; set; }
+        public byte PhaseNo { get; set; }
         public bool IsActive { get; set; }
     }
 
-    public enum Team
-    {
-        YesilKod,
-        SiyahKod,
-        Diger
-    }
+ 
 }
 

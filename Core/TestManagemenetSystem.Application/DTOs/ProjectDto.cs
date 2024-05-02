@@ -7,11 +7,10 @@ using TestManagementSystem.Domain.Entities;
 
 namespace TestManagementSystem.Application.DTOs
 {
-    public class TestDto
+    public class ProjectDto
     {
         public Guid Id { get; set; }
-        public Guid ProjectId { get; set; }
-        public byte PhaseNo { get; set; }
-        public bool IsActive { get; set; } = true;
+        public string ProjectName { get; set; }
+        public Team Team { get; set; }
     }
 }

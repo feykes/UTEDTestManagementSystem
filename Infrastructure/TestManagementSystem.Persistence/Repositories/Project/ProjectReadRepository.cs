@@ -9,9 +9,9 @@ using TestManagementSystem.Persistence.Context;
 
 namespace TestManagementSystem.Persistence.Repositories
 {
-    public class FindingReadRepository : ReadRepository<Finding>, IFindingReadRepository
+    public class ProjectReadRepository : ReadRepository<Project>, IProjectReadRepository
     {
-        public FindingReadRepository(AppDbContext context) : base(context)
+        public ProjectReadRepository(AppDbContext context) : base(context)
         {
         }
     }

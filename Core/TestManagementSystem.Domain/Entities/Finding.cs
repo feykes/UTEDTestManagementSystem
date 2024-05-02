@@ -16,6 +16,8 @@ namespace TestManagementSystem.Domain.Entities
         public byte Round { get; set; }
         public string Note { get; set; }
         public string ToWho { get; set; }
+        public Test Test { get; set; }
+        public Guid TestId { get; set; }
         public ICollection<UploadedFile> Files { get; set; }
     }
     public enum ImportanceLevel

@@ -7,7 +7,7 @@ using TestManagementSystem.Domain.Entities;
 
 namespace TestManagementSystem.Application.Repositories
 {
-    public interface IFindingWriteRepository : IWriteRepository<Finding>
+    public interface IProjectWriteRepository : IWriteRepository<Project>
     {
     }
 }

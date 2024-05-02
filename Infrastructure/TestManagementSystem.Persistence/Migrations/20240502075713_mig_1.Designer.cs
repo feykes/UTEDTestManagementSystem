@@ -12,7 +12,7 @@ using TestManagementSystem.Persistence.Context;
 namespace TestManagementSystem.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240429081637_mig_1")]
+    [Migration("20240502075713_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -51,7 +51,7 @@ namespace TestManagementSystem.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TestId")
+                    b.Property<Guid>("TestId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ToWho")
@@ -63,6 +63,24 @@ namespace TestManagementSystem.Persistence.Migrations
                     b.HasIndex("TestId");
 
                     b.ToTable("Findings");
+                });
+
+            modelBuilder.Entity("TestManagementSystem.Domain.Entities.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Team")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("TestManagementSystem.Domain.Entities.Test", b =>
@@ -77,13 +95,12 @@ namespace TestManagementSystem.Persistence.Migrations
                     b.Property<byte>("PhaseNo")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Team")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Tests");
                 });
@@ -106,9 +123,24 @@ namespace TestManagementSystem.Persistence.Migrations
 
             modelBuilder.Entity("TestManagementSystem.Domain.Entities.Finding", b =>
                 {
-                    b.HasOne("TestManagementSystem.Domain.Entities.Test", null)
+                    b.HasOne("TestManagementSystem.Domain.Entities.Test", "Test")
                         .WithMany("Findings")
-                        .HasForeignKey("TestId");
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Test");
+                });
+
+            modelBuilder.Entity("TestManagementSystem.Domain.Entities.Test", b =>
+                {
+                    b.HasOne("TestManagementSystem.Domain.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("TestManagementSystem.Domain.Entities.UploadedFile", b =>

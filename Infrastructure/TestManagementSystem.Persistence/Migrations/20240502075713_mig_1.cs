@@ -12,18 +12,36 @@ namespace TestManagementSystem.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Team = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tests",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Team = table.Column<int>(type: "int", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PhaseNo = table.Column<byte>(type: "tinyint", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tests_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,7 +56,7 @@ namespace TestManagementSystem.Persistence.Migrations
                     Round = table.Column<byte>(type: "tinyint", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ToWho = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    TestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,7 +65,8 @@ namespace TestManagementSystem.Persistence.Migrations
                         name: "FK_Findings_Tests_TestId",
                         column: x => x.TestId,
                         principalTable: "Tests",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,6 +95,11 @@ namespace TestManagementSystem.Persistence.Migrations
                 name: "IX_Findings_TestId",
                 table: "Findings",
                 column: "TestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tests_ProjectId",
+                table: "Tests",
+                column: "ProjectId");
         }
 
         /// <inheritdoc />
@@ -89,6 +113,9 @@ namespace TestManagementSystem.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tests");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
         }
     }
 }

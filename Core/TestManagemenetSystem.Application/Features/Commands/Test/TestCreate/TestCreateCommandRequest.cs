@@ -9,5 +9,8 @@ namespace TestManagementSystem.Application.Features.Commands.Test.TestCreate
 {
     public class TestCreateCommandRequest : IRequest<TestCreateCommandResponse>
     {
+        public Guid ProjectId { get; set; }
+        public byte PhaseNo { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

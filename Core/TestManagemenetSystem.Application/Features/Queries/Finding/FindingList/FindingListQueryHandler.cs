@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestManagementSystem.Application.Repositories.Finding;
+using TestManagementSystem.Application.Repositories;
 
 namespace TestManagementSystem.Application.Features.Queries.Finding.FindingList
 {

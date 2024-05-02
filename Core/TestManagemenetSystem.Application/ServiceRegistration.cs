@@ -3,6 +3,7 @@ using System.Reflection;
 using AutoMapper;
 using TestManagementSystem.Application.Mappings.TestMap;
 using Microsoft.Extensions.DependencyInjection;
+using TestManagementSystem.Application.Mappings.ProjectMap;
 
 namespace TestManagementSystem.Application
 {
@@ -10,12 +11,13 @@ namespace TestManagementSystem.Application
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
             services.AddAutoMapper(opt =>
             {
                 opt.AddProfiles(new List<Profile>
                 {
-                    new TestProfile()
+                    new TestProfile(),
+                    new ProjectProfile()
                 });
             });
         }
