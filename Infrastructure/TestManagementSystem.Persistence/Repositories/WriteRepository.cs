@@ -28,7 +28,7 @@ namespace TestManagementSystem.Persistence.Repositories
             return entityEntry.State == EntityState.Deleted;
         }
 
-        public async Task<bool> RemoveAsync(int id)
+        public async Task<bool> RemoveAsync(Guid id)
         {
             var data = await Table.FindAsync(id);
             return Remove(data);
@@ -40,5 +40,10 @@ namespace TestManagementSystem.Persistence.Repositories
         }
         public Task<int> SaveAsync() => _context.SaveChangesAsync();
 
+        public bool RemoveRange(List<T> entity)
+        {
+            Table.RemoveRange(entity);
+            return true;
+        }
     }
 }

@@ -10,7 +10,8 @@ namespace TestManagementSystem.Application.Repositories
     {
         Task<bool> AddAsync(T model);
         bool Remove(T model);
-        Task<bool> RemoveAsync(int id);
+        Task<bool> RemoveAsync(Guid id);
+        bool RemoveRange(List<T> entity);
         bool Update(T entity);
         Task<int> SaveAsync();
     }

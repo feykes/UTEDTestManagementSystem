@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestManagementSystem.Application.Features.Commands.Test.TestCreate;
+using TestManagementSystem.Application.Features.Commands.Test.TestRemove;
+using TestManagementSystem.Application.Features.Commands.Test.TestUpdate;
 using TestManagementSystem.Application.Features.Queries.Finding.FindingList;
 using TestManagementSystem.Application.Features.Queries.Test.TestList;
 
@@ -29,6 +31,20 @@ namespace TestManagementSystem.Presentation.Controllers
         public async Task<IActionResult> CreateTest(TestCreateCommandRequest testCreateCommandRequest)
         {
             await _mediator.Send(testCreateCommandRequest);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateTest(TestUpdateCommandRequest testUpdateCommandRequest)
+        {
+            await _mediator.Send(testUpdateCommandRequest);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveTest(TestRemoveCommandRequest testRemoveCommandRequest)
+        {
+            await _mediator.Send(testRemoveCommandRequest);
             return Ok();
         }
     }

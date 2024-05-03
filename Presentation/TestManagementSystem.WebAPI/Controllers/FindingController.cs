@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestManagementSystem.Application.Features.Commands.Finding.FindingCreate;
+using TestManagementSystem.Application.Features.Commands.Finding.FindingRemove;
+using TestManagementSystem.Application.Features.Commands.Finding.FindingUpdate;
 using TestManagementSystem.Application.Features.Queries.Finding.FindingList;
 
 namespace TestManagementSystem.WebAPI.Controllers
@@ -28,6 +30,20 @@ namespace TestManagementSystem.WebAPI.Controllers
         public async Task<IActionResult> CreateFinding(FindingCreateCommandRequest findingCreateCommandRequest)
         {
             await _mediator.Send(findingCreateCommandRequest);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateFinding(FindingUpdateCommandRequest findingUpdateCommandRequest)
+        {
+            await _mediator.Send(findingUpdateCommandRequest);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveFinding(FindingRemoveCommandRequest findingRemoveCommandRequest)
+        {
+            await _mediator.Send(findingRemoveCommandRequest);
             return Ok();
         }
     }
