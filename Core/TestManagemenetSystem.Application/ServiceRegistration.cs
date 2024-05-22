@@ -1,9 +1,9 @@
-﻿using MediatR;
-using System.Reflection;
-using AutoMapper;
-using TestManagementSystem.Application.Mappings.TestMap;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using TestManagementSystem.Application.Mappings.ProjectMap;
+using TestManagementSystem.Application.Mappings.TestMap;
 
 namespace TestManagementSystem.Application
 {

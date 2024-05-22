@@ -11,7 +11,7 @@ namespace TestManagementSystem.Persistence.Repositories
 {
     public class TestWriteRepository : WriteRepository<Test>, ITestWriteRepository
     {
-        public TestWriteRepository(AppDbContext context) : base(context)
+        public TestWriteRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

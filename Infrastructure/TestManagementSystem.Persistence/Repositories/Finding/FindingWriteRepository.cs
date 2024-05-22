@@ -11,7 +11,7 @@ namespace TestManagementSystem.Persistence.Repositories
 {
     public class FindingWriteRepository : WriteRepository<Finding>, IFindingWriteRepository
     {
-        public FindingWriteRepository(AppDbContext context) : base(context)
+        public FindingWriteRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

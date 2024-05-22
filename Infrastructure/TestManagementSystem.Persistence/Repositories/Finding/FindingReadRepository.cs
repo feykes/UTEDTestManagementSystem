@@ -11,7 +11,7 @@ namespace TestManagementSystem.Persistence.Repositories
 {
     public class FindingReadRepository : ReadRepository<Finding>, IFindingReadRepository
     {
-        public FindingReadRepository(AppDbContext context) : base(context)
+        public FindingReadRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

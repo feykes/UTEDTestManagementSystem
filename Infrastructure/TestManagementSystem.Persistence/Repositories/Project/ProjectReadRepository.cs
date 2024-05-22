@@ -11,7 +11,7 @@ namespace TestManagementSystem.Persistence.Repositories
 {
     public class ProjectReadRepository : ReadRepository<Project>, IProjectReadRepository
     {
-        public ProjectReadRepository(AppDbContext context) : base(context)
+        public ProjectReadRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

@@ -7,9 +7,9 @@ namespace TestManagementSystem.Persistence.Repositories
 {
     public class WriteRepository<T> : IWriteRepository<T> where T : class
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public WriteRepository(AppDbContext context)
+        public WriteRepository(ApplicationDbContext context)
         {
             _context = context;
         }

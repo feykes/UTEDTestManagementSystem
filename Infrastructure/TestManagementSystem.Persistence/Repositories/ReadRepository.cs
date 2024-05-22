@@ -12,9 +12,9 @@ namespace TestManagementSystem.Persistence.Repositories
 {
     public class ReadRepository<T> : IReadRepository<T> where T : class
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ReadRepository(AppDbContext context)
+        public ReadRepository(ApplicationDbContext context)
         {
             _context = context;
         }
