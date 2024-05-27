@@ -3,7 +3,16 @@ using TestManagementSystem.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 builder.Services.AddControllers();
 
 builder.Services.AddApplicationServices();
@@ -17,16 +26,17 @@ builder.Services.AddCors(options =>
                             ));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 var app = builder.Build();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors();
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.Use(async (context, next) =>
@@ -35,7 +45,5 @@ app.Use(async (context, next) =>
     await next();
 });
 
-
 app.MapControllers();
-
 app.Run();
